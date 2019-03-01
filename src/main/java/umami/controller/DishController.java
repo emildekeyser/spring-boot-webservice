@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.validation.Valid;
 
 @Controller
-public class MainController implements WebMvcConfigurer {
+public class DishController implements WebMvcConfigurer {
     @Autowired
     private UmamiService umamiService;
 
