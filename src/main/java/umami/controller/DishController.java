@@ -29,7 +29,7 @@ public class DishController implements WebMvcConfigurer {
     }
 
     @GetMapping("/dishes/delete/{id}")
-    public String deletDish(@PathVariable("id") int id, Model model) {
+    public String deletDish(@PathVariable("id") Long id, Model model) {
         umamiService.deleteByID(id);
         return "redirect:/dishes";
     }
@@ -51,7 +51,7 @@ public class DishController implements WebMvcConfigurer {
     }
 
     @GetMapping("/dishes/update/{id}")
-    public String updateDish(@PathVariable("id") int id, Model model) {
+    public String updateDish(@PathVariable("id") Long id, Model model) {
         Dish dish = umamiService.getDishById(id);
         model.addAttribute("dish", dish);
         return "updateDish";

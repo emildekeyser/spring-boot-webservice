@@ -1,11 +1,21 @@
 package umami.model;
 
+
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Dish {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     // check values inputted in form
     @NotNull
@@ -19,23 +29,34 @@ public class Dish {
     @Size(min=5, max=50)
     private String description;
 
-    @NotNull
+    @NotNull @Range(min=0)
     private double price;
+
+//    @NotNull @NotEmpty
+    private String dishType;
 
     public Dish() {}
 
-    public Dish(int id, String name, String description, double price) {
+    public Dish(Long id, String name, String description, double price, String dishType) {
         this.setId(id);
         this.setName(name);
         this.setDescription(description);
         this.setPrice(price);
+        this.setType(dishType);
     }
 
-    public int getId() {
+    private void setType(String dishType) {
+        this.dishType = dishType;
+    }
+    public String getType() {
+        return this.dishType;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

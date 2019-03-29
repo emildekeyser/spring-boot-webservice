@@ -1,40 +1,34 @@
 package umami.model;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Entity
 public class DayMenu {
-    @NotNull
-    @NotEmpty
-    private Day day;
-    @NotNull
-    @NotEmpty
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    //    @NotNull
+//    @NotEmpty
     private Date date;
-    @NotNull
-    @NotEmpty
+    //    @NotNull
+//    @NotEmpty
+    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Dish soep;
-    @NotNull
-    @NotEmpty
+    //    @NotNull
+//    @NotEmpty
+    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Dish dagschotel;
-    @NotNull
-    @NotEmpty
+    //    @NotNull
+//    @NotEmpty
+    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Dish veggie;
 
-    public DayMenu(@NotNull @NotEmpty Day day, @NotNull @NotEmpty Date date, @NotNull @NotEmpty Dish soep, @NotNull @NotEmpty Dish dagschotel, @NotNull @NotEmpty Dish veggie) {
-        this.day = day;
-        this.date = date;
-        this.soep = soep;
-        this.dagschotel = dagschotel;
-        this.veggie = veggie;
-    }
-
-    public Day getDay() {
-        return day;
-    }
-
-    public void setDay(Day day) {
-        this.day = day;
+    public String getDay() {
+        return new SimpleDateFormat("EE").format(this.date);
     }
 
     public Date getDate() {

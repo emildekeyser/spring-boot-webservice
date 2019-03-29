@@ -18,13 +18,20 @@ public class MenuController {
         return umamiService.getWeekMenu();
     }
 
-//    @PostMapping("feedback")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Feedback createNewFeedback(@RequestBody @Valid Feedback feedback) {
-//        int id = feedbackService.addFeedback(feedback);
-//        return feedbackService.findFeedbackById(id);
-//    }
-//
+    @PostMapping("daymenu/add")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<DayMenu> addDayMenu(@RequestBody DayMenu dayMenu) {
+        umamiService.addDayMenu(dayMenu);
+        return umamiService.getWeekMenu();
+    }
+
+    @PostMapping("daymenu/change")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<DayMenu> changeDayMenu(@RequestBody DayMenu dayMenu) {
+        umamiService.updateDayMenu(dayMenu);
+        return umamiService.getWeekMenu();
+    }
+
 //    @GetMapping("feedback/id/{foo}")
 //    public Feedback getSpecificFeedbackById(@PathVariable("foo") int id) {
 //        return feedbackService.findFeedbackById(id);
