@@ -13,7 +13,7 @@ public class MenuController {
     @Autowired
     UmamiService umamiService;
 
-    @GetMapping("weekmenu")
+    @GetMapping("/weekmenu")
     public List<DayMenu> getWeekMenu() {
         return umamiService.getWeekMenu();
     }

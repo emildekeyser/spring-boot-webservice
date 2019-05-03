@@ -65,7 +65,11 @@ dependencies {
     compile("com.h2database:h2")
     // needed for testing
     testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    // actuator
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
     
     // Development tools that don't work
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
+//    developmentOnly("org.springframework.boot:spring-boot-devtools")
 }

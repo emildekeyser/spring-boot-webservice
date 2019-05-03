@@ -3,23 +3,24 @@ package umami;
 import umami.model.DayMenu;
 import umami.model.Dish;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class MenuBuilder {
-    private Date date;
+    private LocalDate date;
     private Dish soep;
     private Dish dagschotel;
     private Dish veggie;
 
     public static MenuBuilder aMenu() {
         return new MenuBuilder()
-                .withDate(new Date())
-                .withSoep(DishBuilder.aDish().build())
+                .withDate(LocalDate.of(2000, 1, 1))
+                .withSoep(DishBuilder.aMeatDish().build())
                 .withDagschotel(DishBuilder.aMeatDish().build())
                 .withVeggie(DishBuilder.aVegDish().build());
     }
 
-    private MenuBuilder withDate(Date date) {
+    private MenuBuilder withDate(LocalDate date) {
         this.date = date;
         return this;
     }

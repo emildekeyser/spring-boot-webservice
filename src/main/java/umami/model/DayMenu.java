@@ -4,38 +4,50 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+//import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class DayMenu {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    //    @NotNull
-//    @NotEmpty
-    private Date date;
-    //    @NotNull
-//    @NotEmpty
-    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+        @NotNull
+    @NotEmpty
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private LocalDate date;
+
+    @NotNull
+    @NotEmpty
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Dish soep;
-    //    @NotNull
-//    @NotEmpty
-    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @NotNull
+    @NotEmpty
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Dish dagschotel;
-    //    @NotNull
-//    @NotEmpty
-    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+        @NotNull
+    @NotEmpty
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Dish veggie;
 
-    public String getDay() {
-        return new SimpleDateFormat("EE").format(this.date);
+    public DayMenu(LocalDate date, Dish soep, Dish dagschotel, Dish veggie){
+        this.date = date;
+        this.soep = soep;
+        this.dagschotel = dagschotel;
+        this.veggie = veggie;
     }
 
-    public Date getDate() {
-        return date;
+    public DayMenu(){}
+
+//    public String getDay() {
+//        return new SimpleDateFormat("EE").format(this.date);
+//    }
+
+    public String getDate() {
+        return date.toString();
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -37,7 +37,7 @@ public class Dish {
 
     public Dish() {}
 
-    public Dish(Long id, String name, String description, double price, String dishType) {
+    public Dish(String name, String description, double price, String dishType) {
         this.setId(id);
         this.setName(name);
         this.setDescription(description);
