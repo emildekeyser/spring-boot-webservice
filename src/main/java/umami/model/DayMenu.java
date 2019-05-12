@@ -44,7 +44,7 @@ public class DayMenu {
 //    }
 
     public String getDate() {
-        return date.toString();
+        return date;
     }
 
     public void setDate(String date) {

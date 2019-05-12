@@ -22,13 +22,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">3</div>
+<div class="counter">15</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">15</div>
 <p>failures</p>
 </div>
 </td>
@@ -40,7 +40,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.123s</div>
+<div class="counter">0.005s</div>
 <p>duration</p>
 </div>
 </td>
@@ -49,8 +49,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">0%</div>
 <p>successful</p>
 </div>
 </td>
@@ -60,10 +60,78 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Classes</a>
+<a href="#tab0">Failed tests</a>
+</li>
+<li>
+<a href="#tab1">Classes</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<ul class="linkList">
+<li>
+<a href="../classes/umami.DishesRepositoryIntegrationTest.html">DishesRepositoryIntegrationTest</a>.
+<a href="../classes/umami.DishesRepositoryIntegrationTest.html#saveUpdates">saveUpdates</a>
+</li>
+<li>
+<a href="../classes/umami.DishesRepositoryIntegrationTest.html">DishesRepositoryIntegrationTest</a>.
+<a href="../classes/umami.DishesRepositoryIntegrationTest.html#whenDeleteById_thenDishIsGone">whenDeleteById_thenDishIsGone</a>
+</li>
+<li>
+<a href="../classes/umami.DishesRepositoryIntegrationTest.html">DishesRepositoryIntegrationTest</a>.
+<a href="../classes/umami.DishesRepositoryIntegrationTest.html#whenFindAll_thenReturnAllDish">whenFindAll_thenReturnAllDish</a>
+</li>
+<li>
+<a href="../classes/umami.DishesRepositoryIntegrationTest.html">DishesRepositoryIntegrationTest</a>.
+<a href="../classes/umami.DishesRepositoryIntegrationTest.html#whenFindByName_thenReturnDish">whenFindByName_thenReturnDish</a>
+</li>
+<li>
+<a href="../classes/umami.MenuControllerUnitTest.html">MenuControllerUnitTest</a>.
+<a href="../classes/umami.MenuControllerUnitTest.html#givenNoDaymenus_whenAddDaymenuWithNoValidDaymenu_thenReturnJsonArray">givenNoDaymenus_whenAddDaymenuWithNoValidDaymenu_thenReturnJsonArray</a>
+</li>
+<li>
+<a href="../classes/umami.MenuControllerUnitTest.html">MenuControllerUnitTest</a>.
+<a href="../classes/umami.MenuControllerUnitTest.html#givenNoDaymenus_whenAddDaymenu_thenReturnJsonArray">givenNoDaymenus_whenAddDaymenu_thenReturnJsonArray</a>
+</li>
+<li>
+<a href="../classes/umami.MenuControllerUnitTest.html">MenuControllerUnitTest</a>.
+<a href="../classes/umami.MenuControllerUnitTest.html#givenTwoDaymenus_whenGetDaymenus_thenReturnJsonArray">givenTwoDaymenus_whenGetDaymenus_thenReturnJsonArray</a>
+</li>
+<li>
+<a href="../classes/umami.UmamiServiceUnitTest.html">UmamiServiceUnitTest</a>.
+<a href="../classes/umami.UmamiServiceUnitTest.html#addDish">addDish</a>
+</li>
+<li>
+<a href="../classes/umami.UmamiServiceUnitTest.html">UmamiServiceUnitTest</a>.
+<a href="../classes/umami.UmamiServiceUnitTest.html#deleteByID">deleteByID</a>
+</li>
+<li>
+<a href="../classes/umami.UmamiServiceUnitTest.html">UmamiServiceUnitTest</a>.
+<a href="../classes/umami.UmamiServiceUnitTest.html#getAllDishes">getAllDishes</a>
+</li>
+<li>
+<a href="../classes/umami.UmamiServiceUnitTest.html">UmamiServiceUnitTest</a>.
+<a href="../classes/umami.UmamiServiceUnitTest.html#getdishbyid">getdishbyid</a>
+</li>
+<li>
+<a href="../classes/umami.UmamiServiceUnitTest.html">UmamiServiceUnitTest</a>.
+<a href="../classes/umami.UmamiServiceUnitTest.html#getweekmenu">getweekmenu</a>
+</li>
+<li>
+<a href="../classes/umami.UmamiServiceUnitTest.html">UmamiServiceUnitTest</a>.
+<a href="../classes/umami.UmamiServiceUnitTest.html#updatedish">updatedish</a>
+</li>
+<li>
+<a href="../classes/umami.WeekMenuRepositoryIntegrationTest.html">WeekMenuRepositoryIntegrationTest</a>.
+<a href="../classes/umami.WeekMenuRepositoryIntegrationTest.html#whenFindAll_thenReturnAllDish">whenFindAll_thenReturnAllDish</a>
+</li>
+<li>
+<a href="../classes/umami.WeekMenuRepositoryIntegrationTest.html">WeekMenuRepositoryIntegrationTest</a>.
+<a href="../classes/umami.WeekMenuRepositoryIntegrationTest.html#whenFindByName_thenReturnDish">whenFindByName_thenReturnDish</a>
+</li>
+</ul>
+</div>
+<div id="tab1" class="tab">
 <h2>Classes</h2>
 <table>
 <thread>
@@ -77,14 +145,44 @@
 </tr>
 </thread>
 <tr>
-<td class="success">
-<a href="../classes/umami.UmamiServiceUnitTest.html">UmamiServiceUnitTest</a>
+<td class="failures">
+<a href="../classes/umami.DishesRepositoryIntegrationTest.html">DishesRepositoryIntegrationTest</a>
+</td>
+<td>4</td>
+<td>4</td>
+<td>0</td>
+<td>0s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="../classes/umami.MenuControllerUnitTest.html">MenuControllerUnitTest</a>
 </td>
 <td>3</td>
+<td>3</td>
 <td>0</td>
+<td>0s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="../classes/umami.UmamiServiceUnitTest.html">UmamiServiceUnitTest</a>
+</td>
+<td>6</td>
+<td>6</td>
 <td>0</td>
-<td>0.123s</td>
-<td class="success">100%</td>
+<td>0.004s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="../classes/umami.WeekMenuRepositoryIntegrationTest.html">WeekMenuRepositoryIntegrationTest</a>
+</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="failures">0%</td>
 </tr>
 </table>
 </div>
@@ -96,7 +194,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 4.10</a> at Apr 26, 2019 8:36:43 AM</p>
+<a href="http://www.gradle.org">Gradle 4.10</a> at May 12, 2019, 7:46:19 PM</p>
 </div>
 </div>
 </body>
