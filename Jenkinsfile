@@ -2,13 +2,19 @@ pipeline {
     agent any
     stages {
 	stage('Checkout') {
-	    checkout scm
+	    steps {
+		checkout scm
+	    }
 	}
 	stage('Build') {
-	    sh 'gradlew bootJar'
+	    steps {
+		sh 'gradlew bootJar'
+	    }
 	}
 	stage('Deploy') {
-	    echo 'Deploying....'
+	    steps {
+		echo 'Deploying....'
+	    }
 	}
     }
 
