@@ -1,17 +1,20 @@
 pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-		checkout scm
-                sh 'gradlew bootJar'
+    node {
+	agent any
+	stages {
+	    stage('Build') {
+		steps {
+		    checkout scm
+		    sh 'gradlew bootJar'
 		}
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+	    }
+	    stage('Deploy') {
+		steps {
+		    echo 'Deploying....'
 		}
-        }
+	    }
+	}
+
     }
 }
 
