@@ -1,20 +1,16 @@
-pipeline {
-    node {
-	agent any
-	stages {
-	    stage('Build') {
-		steps {
-		    checkout scm
-		    sh 'gradlew bootJar'
-		}
-	    }
-	    stage('Deploy') {
-		steps {
-		    echo 'Deploying....'
-		}
-	    }
+node {
+    agent any
+    stages {
+	stage('Checkout') {
+	    checkout scm
 	}
-
+	stage('Build') {
+	    sh 'gradlew bootJar'
+	}
+	stage('Deploy') {
+	    echo 'Deploying....'
+	}
     }
+
 }
 
