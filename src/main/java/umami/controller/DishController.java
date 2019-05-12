@@ -17,7 +17,7 @@ public class DishController implements WebMvcConfigurer {
     @Autowired
     private UmamiService umamiService;
 
-    @GetMapping("/home")
+    @RequestMapping(value = "/{locale:en|fr|nl}/home")
     public String home() {
         return "index";
     }

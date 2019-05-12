@@ -52,6 +52,9 @@ dependencies {
     // needed for Spring Boot -> embedded tomcat
     compile("org.springframework.boot:spring-boot-starter-web")
 
+    // security
+    compile("org.springframework.boot:spring-boot-starter-security")
+
     // needed because we use jsp
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
     compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '9.0.10'
@@ -69,7 +72,7 @@ dependencies {
     // actuator
     compile("org.springframework.boot:spring-boot-starter-actuator")
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    
+
     // Development tools that don't work
 //    developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
