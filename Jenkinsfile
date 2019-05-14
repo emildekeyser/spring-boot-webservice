@@ -10,9 +10,9 @@ pipeline {
 	    steps {
 		sh '''
 
-			docker build -t user1user1/umami .'
-			docker login -u user1user1 -p r0599128'
-			docker push user1user1/umami' 
+			docker build -t user1user1/umami .
+			docker login -u user1user1 -p r0599128
+			docker push user1user1/umami
 
 		'''
 	    }
