@@ -13,7 +13,14 @@ pipeline {
 	}
 	stage('Deploy') {
 	    steps {
-		sh 'JENKINS_NODE_COOKIE=dontKillMe java -jar ./build/libs/umami-0.1.0.jar'
+		sh '''
+
+		FILE=/tmp/deploy.pid  
+		[ -f $FILE ] && kill -15 $(cat $FILE)			
+		JENKINS_NODE_COOKIE=dontKillMe nohup java -jar ./build/libs/umami-0.1.0.jar &
+		echo $! > /tmp/deploy.pid
+
+		'''
 	    }
 	}
     }
