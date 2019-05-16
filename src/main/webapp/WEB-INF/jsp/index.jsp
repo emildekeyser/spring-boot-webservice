@@ -9,6 +9,7 @@
     <title><spring:message code="label.dishes"/></title>
 </head>
 <body>
+    <jsp:include page="nav.jsp"/>
     <ul>
         <li><a href="/dishes/"><spring:message code="label.dishes" /></a></li>
         <%--<li><a href="/feedback/add">Add feedback</a></li>--%>

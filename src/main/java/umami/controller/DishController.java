@@ -22,6 +22,11 @@ public class DishController implements WebMvcConfigurer {
         return "index";
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @GetMapping("/dishes")
     public String dishes(Model model) {
         model.addAttribute("dishes", umamiService.getAllDishes());
