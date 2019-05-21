@@ -17,7 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
-            .mvcMatchers("/home", "/*/home", "/").permitAll();
+            .mvcMatchers("/home", "/*/home", "/", "/weekmenu").permitAll();
 
         http.authorizeRequests()
             .mvcMatchers(

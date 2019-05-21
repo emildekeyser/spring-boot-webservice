@@ -3,11 +3,7 @@ package umami.model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class UmamiService {
@@ -42,6 +38,7 @@ public class UmamiService {
     }
 
     public void addDayMenu(DayMenu dayMenu) {
+        System.out.println(dayMenu);
         this.weekMenuRepo.save(dayMenu);
     }
 

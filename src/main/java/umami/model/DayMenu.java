@@ -18,15 +18,15 @@ public class DayMenu {
     private String date;
 
     @NotNull
-    @NotEmpty
+//    @NotEmpty
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Dish soep;
     @NotNull
-    @NotEmpty
+//    @NotEmpty
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Dish dagschotel;
-        @NotNull
-    @NotEmpty
+    @NotNull
+//    @NotEmpty
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Dish veggie;
 

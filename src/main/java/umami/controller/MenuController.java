@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import umami.model.DayMenu;
+import umami.model.Dish;
 import umami.model.UmamiService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,9 +20,16 @@ public class MenuController {
         return umamiService.getWeekMenu();
     }
 
+//    @GetMapping("/test")
+//    public List<DayMenu> getTest() {
+//        DayMenu menu = new DayMenu();
+//        menu.setDate("01/03/2005");
+//        menu.setDagschotel(new Dish());
+//    }
+
     @PostMapping("daymenu/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<DayMenu> addDayMenu(@RequestBody DayMenu dayMenu) {
+    public List<DayMenu> addDayMenu(@RequestBody @Valid DayMenu dayMenu) {
         umamiService.addDayMenu(dayMenu);
         return umamiService.getWeekMenu();
     }
@@ -69,7 +78,7 @@ public class MenuController {
 //        feedbackService.deleteFeedback(id);
 //    }
 
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Requested feedback not found!")
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "wrong")
     @ExceptionHandler(value = IllegalArgumentException.class)
     public void badIdExceptionHandler() {
     }
