@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { HeroesComponent } from './heroes/heroes.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+import { WeeksComponent } from './weeks/weeks.component';
+import { WeekDetailComponent } from './week-detail/week-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeroesComponent,
-    HeroDetailComponent
+    WeeksComponent,
+    WeekDetailComponent
   ],
   imports: [
 	  BrowserModule,

@@ -16,6 +16,7 @@ public class WeekMenuController {
     @Autowired
     UmamiService umamiService;
 
+    @CrossOrigin
     @GetMapping("/weekmenu")
     public List<WeekMenu> getWeekMenus() {
         return this.umamiService.getWeekMenus();

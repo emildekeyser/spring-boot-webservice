@@ -1,0 +1,45 @@
+<h2>My Weeks</h2>
+
+<ul class="weeks">
+		<!-- [class.selected]="week == selectedWeek" -->
+		<!-- (click)="onSelect(week)"> -->
+		<!-- <span class="badge"> {{week.id}} </span> {{week.week[1].date}} -->
+	<li *ngFor="let week of weeks">
+		<table>
+			<tr>
+				<th>{{week.id}}</th>
+				<th>{{week.week[1].dayName}}</th>
+				<th>{{week.week[2].dayName}}</th>
+				<th>{{week.week[3].dayName}}</th>
+				<th>{{week.week[4].dayName}}</th>
+				<th>{{week.week[5].dayName}}</th>
+			</tr>
+			<tr>
+				<th scope="row">Soep</th>
+				<td *ngFor="let kv of week.week | keyvalue"
+					(click)="onSelect(kv.value.soep)">
+
+					{{kv.value.soep.name}}
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">Dagschotel</th>
+				<td *ngFor="let kv of week.week | keyvalue"
+					(click)="onSelect(kv.value.dagschotel)">
+
+					{{kv.value.dagschotel.name}}
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">Veggie</th>
+				<td *ngFor="let kv of week.week | keyvalue"
+					(click)="onSelect(kv.value.veggie)">
+
+					{{kv.value.veggie.name}}
+				</td>
+			</tr>
+		</table>
+	</li>
+</ul>
+
+<app-week-detail [dish]="selectedDish"></app-week-detail>

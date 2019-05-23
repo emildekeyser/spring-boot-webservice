@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HeroService } from './hero.service';
+import { WeekService } from './week.service';
 
-describe('HeroService', () => {
+describe('WeekService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: HeroService = TestBed.get(HeroService);
+    const service: WeekService = TestBed.get(WeekService);
     expect(service).toBeTruthy();
   });
 });
