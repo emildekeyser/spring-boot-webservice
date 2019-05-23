@@ -2,6 +2,7 @@ package umami.controller;
 
 import org.springframework.validation.BindingResult;
 import umami.model.Dish;
+import umami.model.DishType;
 import umami.model.UmamiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,12 +34,6 @@ public class DishController implements WebMvcConfigurer {
         return "dishes";
     }
 
-    @GetMapping("/dishes/delete/{id}")
-    public String deletDish(@PathVariable("id") Long id, Model model) {
-        umamiService.deleteByID(id);
-        return "redirect:/dishes";
-    }
-
     @GetMapping("/dishes/add")
     public String addDishForm(Model model) {
         return "addDish";
@@ -55,10 +50,18 @@ public class DishController implements WebMvcConfigurer {
         }
     }
 
-    @GetMapping("/dishes/update/{id}")
-    public String updateDish(@PathVariable("id") Long id, Model model) {
-        Dish dish = umamiService.getDishById(id);
+    @GetMapping("/dishes/delete/{name}")
+    public String deleteDish(@PathVariable("name") String name) {
+        Dish dish = umamiService.findDishByName(name);
+        umamiService.deleteDish(dish);
+        return "redirect:/dishes";
+    }
+
+    @GetMapping("/dishes/update/{name}")
+    public String updateDish(@PathVariable("name") String name, Model model) {
+        Dish dish = umamiService.findDishByName(name);
         model.addAttribute("dish", dish);
+        model.addAttribute("dishTypes", DishType.values());
         return "updateDish";
     }
 
@@ -66,7 +69,7 @@ public class DishController implements WebMvcConfigurer {
     public String updateDish(@Valid Dish dish, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getFieldErrors());
-            model.addAttribute("dish", umamiService.getDishById(dish.getId()));
+            model.addAttribute("dishTypes", DishType.values());
             return "updateDish";
         } else {
             umamiService.updateDish(dish);

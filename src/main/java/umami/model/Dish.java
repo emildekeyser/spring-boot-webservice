@@ -1,69 +1,56 @@
 package umami.model;
 
-
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 
 @Entity
 public class Dish {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
-    // check values inputted in form
-    @NotNull
-    @NotEmpty
-    @Size(min=2, max=20)
+    @Size(min=2, max=50)
     private String name;
 
-    // check values inputted in form
-    @NotNull
-    @NotEmpty
-    @Size(min=5, max=50)
+    @Size(min=4, max=100)
     private String description;
 
-    @NotNull @Range(min=0)
+    @Range(min=0)
     private double price;
 
-//    @NotNull @NotEmpty
-    private String dishType;
+    private DishType dishType;
 
     public Dish() {}
-
-    public Dish(String name, String description, double price, String dishType) {
-        this.setId(id);
+    public Dish(@Size(min = 2, max = 50) String name, @Size(min = 4, max = 100) String description, @Range(min = 0) double price, DishType dishType) {
         this.setName(name);
         this.setDescription(description);
         this.setPrice(price);
         this.setType(dishType);
     }
 
-    private void setType(String dishType) {
+    public void setType(DishType dishType) {
         this.dishType = dishType;
     }
-    public String getType() {
+    public DishType getType() {
         return this.dishType;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
-
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -71,15 +58,13 @@ public class Dish {
     public String getDescription() {
         return description;
     }
-
-    public void setDescription(String feedback) {
-        this.description = feedback;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getPrice() {
         return price;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }

@@ -1,23 +1,22 @@
 package umami;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import umami.controller.MenuController;
-import umami.model.DayMenu;
-import umami.model.UmamiService;
+import umami.controller.DayMenuController;
+import umami.model.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.mockito.Mockito.when;
@@ -26,19 +25,26 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
 // Bootstraps the controller and auto-configures MockMvc, this are testing controllers
 // without starting a full HTTP server
-@WebMvcTest(MenuController.class)
+@RunWith(SpringRunner.class)
+@WebMvcTest(DayMenuController.class)
+@ActiveProfiles("RESTUnitTest")
+@AutoConfigureMockMvc(secure = false)
 public class MenuControllerUnitTest {
 
     @Autowired
-    private MockMvc menuController;
+    private MockMvc dayMenuController;
 
     @MockBean
     private UmamiService service;
 
-//TODO - finish tests
+//    @MockBean
+//    private DishesRepository dummy;
+//    @MockBean
+//    private DayMenuRepository dummy2;
+//    @MockBean
+//    private WeekMenuRepository dummy3;
 
     @Test
     public void givenTwoDaymenus_whenGetDaymenus_thenReturnJsonArray() throws Exception {
@@ -48,13 +54,13 @@ public class MenuControllerUnitTest {
         }
 
         ArrayList<DayMenu> c = (ArrayList<DayMenu>)weekmenu.clone();
-        when(service.getWeekMenu()).thenReturn(weekmenu);
+        when(service.getDayMenus()).thenReturn(weekmenu);
 
-        menuController.perform(get("/weekmenu")
+        dayMenuController.perform(get("/daymenu")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(7)))
-                .andExpect(jsonPath("$[" + 0 + "].date").value(weekmenu.get(0).getDate()))
+                .andExpect(jsonPath("$[" + 0 + "].date").value(weekmenu.get(0).getDate().toString()))
                 .andExpect(jsonPath("$[0].dagschotel.name").value(weekmenu.get(0).getDagschotel().getName()))
                 .andExpect(jsonPath("$[0].soep.name").value(c.get(0).getSoep().getName()))
                 .andExpect(jsonPath("$[0].veggie.name").value(weekmenu.get(0).getVeggie().getName()));
@@ -71,9 +77,9 @@ public class MenuControllerUnitTest {
     @Test
     public void givenNoDaymenus_whenAddDaymenu_thenReturnJsonArray() throws Exception {
         DayMenu menu = MenuBuilder.aMenu().build();
-        when(service.getWeekMenu()).thenReturn(Arrays.asList(menu));
+        when(service.getDayMenus()).thenReturn(Arrays.asList(menu));
 
-        menuController.perform(post("/daymenu/add")
+        dayMenuController.perform(post("/daymenu/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content("[{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"},{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"},{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"},{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"},{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"},{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"},{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"}]"))

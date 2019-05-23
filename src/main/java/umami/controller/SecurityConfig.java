@@ -15,9 +15,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+        http.headers().frameOptions().disable();
 
         http.authorizeRequests()
-            .mvcMatchers("/home", "/*/home", "/", "/weekmenu").permitAll();
+            .mvcMatchers("/home", "/*/home", "/", "/weekmenu/**", "/daymenu/**", "/h2-console/**").permitAll();
 
         http.authorizeRequests()
             .mvcMatchers(

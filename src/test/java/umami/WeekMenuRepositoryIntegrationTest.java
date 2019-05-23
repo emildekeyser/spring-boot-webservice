@@ -7,10 +7,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import umami.model.Dish;
-import umami.model.DishesRepository;
 import umami.model.WeekMenuRepository;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,7 +23,7 @@ public class WeekMenuRepositoryIntegrationTest {
     @Test
     public void whenFindAll_thenReturnAllDish() {
         // given
-        Dish ok = DishBuilder.aMeatDish().build();
+        Dish ok = DishBuilder.aMainCourse().build();
         // puts objects into the in-memory DB
         entityManager.persist(ok);
         entityManager.flush();
@@ -47,7 +44,7 @@ public class WeekMenuRepositoryIntegrationTest {
     @Test
     public void whenFindByName_thenReturnDish() {
         // given
-        Dish ok = DishBuilder.aMeatDish().build();
+        Dish ok = DishBuilder.aMainCourse().build();
         entityManager.persist(ok);
         entityManager.flush();
 

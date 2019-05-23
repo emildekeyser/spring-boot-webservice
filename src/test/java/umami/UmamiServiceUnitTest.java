@@ -3,9 +3,7 @@ package umami;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -43,12 +41,14 @@ public class UmamiServiceUnitTest {
     @MockBean
     private DishesRepository dishesRepository;
     @MockBean
+    private DayMenuRepository dayMenuRepository;
+    @MockBean
     private WeekMenuRepository weekMenuRepository;
 
     @Before
     public void setUp() {
         dish = DishBuilder.aDish().build();
-        meatDish = DishBuilder.aMeatDish().build();
+        meatDish = DishBuilder.aMainCourse().build();
         vegDish = DishBuilder.aVegDish().build();
         dishes = Arrays.asList(new Dish[]{dish, meatDish, vegDish});
 
@@ -92,26 +92,26 @@ public class UmamiServiceUnitTest {
 
     @Test
     public void deleteByID() {
-        this.umamiService.deleteByID(this.dish.getId());
+        this.umamiService.deleteDish(this.dish);
 
         Mockito.verify(this.dishesRepository, Mockito.times(1))
-                .deleteById(this.dish.getId());
+                .delete(this.dish);
     }
 
     @Test
     public void getdishbyid() {
-        Mockito.when(this.dishesRepository.findDishById(this.dish.getId())).
+        Mockito.when(this.dishesRepository.findByName(this.dish.getName())).
                 thenReturn(this.dish);
 
-        assertThat(this.umamiService.getDishById(this.dish.getId()))
+        assertThat(this.umamiService.findDishByName(this.dish.getName()))
                 .isEqualTo(this.dish);
     }
 
     @Test
     public void getweekmenu() {
-        Mockito.when(this.weekMenuRepository.findAll()).thenReturn(this.weekmenu);
+        Mockito.when(this.dayMenuRepository.findAll()).thenReturn(this.weekmenu);
 
-        List<DayMenu> week = this.umamiService.getWeekMenu();
+        List<DayMenu> week = this.umamiService.getDayMenus();
 
 //        assertThat(week.size() == 7);
 //        assertThat(week.containsAll(this.weekmenu));
@@ -127,11 +127,11 @@ public class UmamiServiceUnitTest {
     }
 
     private void testMenuSaves() {
-        Mockito.when(this.weekMenuRepository.save(this.daymenu)).thenReturn(this.daymenu);
+        Mockito.when(this.dayMenuRepository.save(this.daymenu)).thenReturn(this.daymenu);
 
-        this.umamiService.updateDayMenu(this.daymenu);
+        this.umamiService.changeDayMenu(this.daymenu);
 
-        Mockito.verify(this.weekMenuRepository, Mockito.times(1))
+        Mockito.verify(this.dayMenuRepository, Mockito.times(1))
                 .save(this.daymenu);
     }
 }

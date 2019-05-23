@@ -26,7 +26,7 @@ public class DishesRepositoryIntegrationTest {
     @Test
     public void whenFindAll_thenReturnAllDish() {
         // given
-        Dish ok = DishBuilder.aMeatDish().build();
+        Dish ok = DishBuilder.aMainCourse().build();
         // puts objects into the in-memory DB
         entityManager.persist(ok);
         entityManager.flush();
@@ -47,12 +47,12 @@ public class DishesRepositoryIntegrationTest {
     @Test
     public void whenFindByName_thenReturnDish() {
         // given
-        Dish ok = DishBuilder.aMeatDish().build();
+        Dish ok = DishBuilder.aMainCourse().build();
         entityManager.persist(ok);
         entityManager.flush();
 
         // when
-        Dish found = dishesRepository.findDishByName(ok.getName());
+        Dish found = dishesRepository.findByName(ok.getName());
 
         // then
         found.equals(ok);
@@ -61,7 +61,7 @@ public class DishesRepositoryIntegrationTest {
     @Test
     public void whenDeleteById_thenDishIsGone() {
         // given
-        Dish ok = DishBuilder.aMeatDish().build();
+        Dish ok = DishBuilder.aMainCourse().build();
         entityManager.persist(ok);
         entityManager.flush();
         Dish nok = DishBuilder.aVegDish().build();
@@ -79,7 +79,7 @@ public class DishesRepositoryIntegrationTest {
     @Test
     public void saveUpdates() {
         // given
-        Dish ok = DishBuilder.aMeatDish().build();
+        Dish ok = DishBuilder.aMainCourse().build();
         entityManager.persist(ok);
         entityManager.flush();
         double newPrice = ok.getPrice() * 2;
@@ -89,12 +89,12 @@ public class DishesRepositoryIntegrationTest {
         this.dishesRepository.save(ok);
 
         // then
-        assertThat(this.dishesRepository.findDishById(ok.getId()).getPrice())
+        assertThat(this.dishesRepository.findByName(ok.getName()).getPrice())
                 .isEqualTo(newPrice);
     }
     public void saveDeletes(){
         // given
-        Dish ok = DishBuilder.aMeatDish().build();
+        Dish ok = DishBuilder.aMainCourse().build();
         entityManager.persist(ok);
         entityManager.flush();
         Dish nok = DishBuilder.aVegDish().build();
@@ -105,7 +105,7 @@ public class DishesRepositoryIntegrationTest {
         // then
         assertThat(this.dishesRepository.findAll().size())
                 .isEqualTo(2);
-        assertThat(this.dishesRepository.findDishById(nok.getId()))
+        assertThat(this.dishesRepository.findByName(nok.getName()))
                 .isEqualTo(nok);
     }
 

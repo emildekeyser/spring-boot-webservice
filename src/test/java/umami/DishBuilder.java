@@ -1,13 +1,14 @@
 package umami;
 
 import umami.model.Dish;
+import umami.model.DishType;
 
 public class DishBuilder {
 
     private String name;
     private String description;
     private double price;
-    private String type;
+    private DishType type;
 
     private DishBuilder() {}
 
@@ -20,18 +21,26 @@ public class DishBuilder {
                 .withName("Kak met bonen")
                 .withDescription("heel erg vies")
                 .withPrice(4.56)
-                .withType("VEGGIE");
+                .withType(DishType.Veggie);
     }
 
-    public static DishBuilder aMeatDish () {
+    public static DishBuilder aMainCourse() {
         return aDish()
                 .withName("Meat")
                 .withDescription("heel erg lekker")
                 .withPrice(8.56)
-                .withType("DAGSCHOTEL");
+                .withType(DishType.MainCourse);
     }
 
-    private DishBuilder withType(String type) {
+    public static DishBuilder aSoup() {
+        return aDish()
+                .withName("vatzige soep")
+                .withDescription(" dwijlwater")
+                .withPrice(454)
+                .withType(DishType.Soup);
+    }
+
+    private DishBuilder withType(DishType type) {
         this.type = type;
         return this;
     }
@@ -55,6 +64,8 @@ public class DishBuilder {
         Dish dish = new Dish();
         dish.setName(name);
         dish.setDescription(this.description);
+        dish.setPrice(this.price);
+        dish.setType(this.type);
         return dish;
     }
 }

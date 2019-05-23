@@ -20,15 +20,23 @@
     <form method="post" action="/dishes/update">
         <p>
             <label><spring:message code="label.dish.name"/></label>
-            <input type="text" name="name" />
+            <input type="text" name="name" value="${dish.name}"/>
         </p>
         <p>
             <label><spring:message code="label.dish.description"/></label>
-            <input type="text" name="description" />
+            <input type="text" name="description" value="${dish.description}"/>
         </p>
         <p>
             <label><spring:message code="label.dish.price"/></label>
-            <input type="text" name="price" />
+            <input type="text" name="price" value="${dish.price}"/>
+        </p>
+        <p>
+            <label><spring:message code="label.dish.type"/></label>
+            <select>
+                <c:forEach items="${dishTypes}" var="type">
+                    <option value="${type}" <c:if test="${type} == ${dish.type}">selected</c:if> > ${type}</option>
+                </c:forEach>
+            </select>
         </p>
         <input type="hidden" name="id" value="${dish.id}"/>
         <p>

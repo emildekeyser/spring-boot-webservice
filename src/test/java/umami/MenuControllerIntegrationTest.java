@@ -11,10 +11,9 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import umami.model.DayMenu;
-import umami.model.UmamiService;
-import umami.model.WeekMenuRepository;
+import umami.model.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,29 +33,43 @@ public class MenuControllerIntegrationTest {
 
     @Autowired
     private MockMvc menuController;
-
     @Autowired
-    private WeekMenuRepository repo;
+    private DishesRepository dishesRepo;
+    @Autowired
+    private DayMenuRepository dayMenuRepo;
 
     @Test
     public void givenTwoDaymenus_whenGetDaymenus_thenReturnJsonArray() throws Exception {
-        ArrayList<DayMenu> weekmenu = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            DayMenu m = MenuBuilder.aMenu().build();
-            weekmenu.add(m);
-            repo.saveAndFlush(m);
-        }
+//        Dish soup = DishBuilder.aSoup().build();
+//        dishesRepo.saveAndFlush(soup);
+//        Dish mainCourse = DishBuilder.aMainCourse().build();
+//        dishesRepo.saveAndFlush(mainCourse);
+//        Dish veg = DishBuilder.aVegDish().build();
+//        dishesRepo.saveAndFlush(veg);
+//
+//        ArrayList<DayMenu> weekmenu = new ArrayList<>();
+//        for (int i = 0; i < 7; i++) {
+//            DayMenu m = new MenuBuilder()
+//                    .withDate(LocalDate.now())
+//                    .withSoep(soup)
+//                    .withDagschotel(mainCourse)
+//                    .withVeggie(veg)
+//                    .build();
+//            weekmenu.add(m);
+//            this.dayMenuRepo.saveAndFlush(m);
+//        }
+//
+//        ArrayList<DayMenu> c = (ArrayList<DayMenu>)weekmenu.clone();
 
-        ArrayList<DayMenu> c = (ArrayList<DayMenu>)weekmenu.clone();
-
-        menuController.perform(get("/weekmenu")
+        menuController.perform(get("/daymenu")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(7)))
-                .andExpect(jsonPath("$[" + 0 + "].date").value(weekmenu.get(0).getDate()))
-                .andExpect(jsonPath("$[0].dagschotel.name").value(weekmenu.get(0).getDagschotel().getName()))
-                .andExpect(jsonPath("$[0].soep.name").value(c.get(0).getSoep().getName()))
-                .andExpect(jsonPath("$[0].veggie.name").value(weekmenu.get(0).getVeggie().getName()));
+                .andExpect(jsonPath("$", hasSize(5*2)))
+                .andExpect(jsonPath("$[" + 0 + "].date").value(LocalDate.of(2019, 4, 22).toString()))
+//                .andExpect(jsonPath("$[" + 0 + "].date").value("2019-04-22"))
+                .andExpect(jsonPath("$[0].soep.name").value("kak"));
+//                .andExpect(jsonPath("$[0].dagschotel.name").value(weekmenu.get(0).getDagschotel().getName()))
+//                .andExpect(jsonPath("$[0].veggie.name").value(weekmenu.get(0).getVeggie().getName()));
 
 ////        for (int i = 0; i < 7; i++) {
 ////            json.andExpect(jsonPath("$[" + i + "].day").value(weekmenu.get(i).getDay()))
@@ -69,18 +82,42 @@ public class MenuControllerIntegrationTest {
 
     @Test
     public void givenNoDaymenus_whenAddDaymenu_thenReturnJsonArray() throws Exception {
-        DayMenu menu = MenuBuilder.aMenu().build();
+        String json = "  {";
+        json += "    \"date\": \"2019-05-06\",";
+        json += "    \"soep\": {";
+        json += "      \"id\": 1,";
+        json += "      \"name\": \"kak\",";
+        json += "      \"description\": \"VIES\",";
+        json += "      \"price\": 0.5,";
+        json += "      \"type\": \"Soup\"";
+        json += "    },";
+        json += "    \"dagschotel\": {";
+        json += "      \"id\": 2,";
+        json += "      \"name\": \"kak2\",";
+        json += "      \"description\": \"heeldjlvies\",";
+        json += "      \"price\": 0.4,";
+        json += "      \"type\": \"MainCourse\"";
+        json += "    },";
+        json += "    \"veggie\": {";
+        json += "      \"id\": 3,";
+        json += "      \"name\": \"kak3\",";
+        json += "      \"description\": \"heel dsfjgvies\",";
+        json += "      \"price\": 0.7,";
+        json += "      \"type\": \"Veggie\"";
+        json += "    },";
+        json += "    \"dayOfWeek\": 5,";
+        json += "    \"dayName\": \"Friday\",";
+        json += "    \"yearAndWeekNumber\": 201918";
+        json += "  }";
 
         menuController.perform(post("/daymenu/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
-                .content("[{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"},{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"},{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"},{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"},{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"},{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"},{\"date\":\"Tue Apr 30 12:17:36 CEST 2019\",\"soep\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"dagschotel\":{\"id\":null,\"name\":\"Meat\",\"description\":\"heel erg lekker\",\"price\":0.0,\"type\":null},\"veggie\":{\"id\":null,\"name\":\"Kak met bonen\",\"description\":\"heel erg vies\",\"price\":0.0,\"type\":null},\"day\":\"Tue\"}]"))
-                // TODO
-//                .content("{\"name\": \"Elke\", \"Daymenu\": \"OK well done!\"}"))
-                .andDo(print()); // with this you print the request and response
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$", hasSize(1)))
-//                .andExpect(jsonPath("$[0]").value(menu));
+                .content(json))
+                    .andDo(print()) //; // with this you print the request and response
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$", hasSize(11)))
+                    .andExpect(jsonPath("$[10].date").value("2019-05-06"));
     }
 
     @Test

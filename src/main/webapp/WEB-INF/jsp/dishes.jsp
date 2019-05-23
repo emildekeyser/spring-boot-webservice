@@ -21,8 +21,8 @@
             <td>${dish.name}</td>
             <td>${dish.price}</td>
                 <%--<td>${dish.description}</td>--%>
-            <td><a href="/dishes/update/${dish.id}"><spring:message code="label.update"/></a></td>
-            <td><a href="/dishes/delete/${dish.id}"><spring:message code="label.delete"/></a></td>
+            <td><a href="/dishes/update/${dish.name}"><spring:message code="label.update"/></a></td>
+            <td><a href="/dishes/delete/${dish.name}"><spring:message code="label.delete"/></a></td>
         </tr>
     </c:forEach>
     </tbody>

@@ -3,37 +3,39 @@ package umami;
 import umami.model.DayMenu;
 import umami.model.Dish;
 
+import java.time.LocalDate;
+
 public class MenuBuilder {
-    private String date;
+    private LocalDate date;
     private Dish soep;
     private Dish dagschotel;
     private Dish veggie;
 
     public static MenuBuilder aMenu() {
         return new MenuBuilder()
-                .withDate("1/1/2000")
-                .withSoep(DishBuilder.aMeatDish().build())
-                .withDagschotel(DishBuilder.aMeatDish().build())
+                .withDate(LocalDate.now())
+                .withSoep(DishBuilder.aSoup().build())
+                .withDagschotel(DishBuilder.aMainCourse().build())
                 .withVeggie(DishBuilder.aVegDish().build());
     }
 
-    private MenuBuilder withDate(String date) {
+    public MenuBuilder withDate(LocalDate date) {
         this.date = date;
         return this;
     }
 
-    private MenuBuilder withSoep(Dish soep) {
+    public MenuBuilder withSoep(Dish soep) {
         this.soep = soep;
         return this;
     }
 
 
-    private MenuBuilder withDagschotel(Dish dagschotel) {
+    public MenuBuilder withDagschotel(Dish dagschotel) {
         this.dagschotel = dagschotel;
         return this;
     }
 
-    private MenuBuilder withVeggie(Dish veggie) {
+    public MenuBuilder withVeggie(Dish veggie) {
         this.veggie = veggie;
         return this;
     }
