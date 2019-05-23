@@ -2,20 +2,18 @@ package umami.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
 @Entity
+@Table(name = "weekmenu")
 public class WeekMenu {
     @Id
     private int id = 0;
 
     @OneToMany
-//    @MapKeyColumn(name = "daymenu_number")
-//    @MapKeyColumn(name = "day_number")
+    @MapKeyColumn(name = "daymenu_number")
     private Map<Integer, DayMenu> week = new HashMap<>();
 
     public void setId(int id) {

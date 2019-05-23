@@ -7,6 +7,7 @@ import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 
 @Entity
+@Table(name = "daymenu")
 public class DayMenu {
     @Id
     @NotNull
